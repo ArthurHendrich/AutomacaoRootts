@@ -11,11 +11,11 @@ jobs:
         python-version: 3.9
     - name: Install dependencies
       run: /
-        python -m pip install --upgrade pip
+        python -m pip install
         pip install -r requirements.txt
     - name: Initialize Envirement
       run: /
-        python3 manage.py runserver
+        python manage.py runserver
     - name: Checkout
       uses: actions/checkout@v2.5.0
     - name: Cypress.io
