@@ -9,7 +9,7 @@ jobs:
       uses: cypress-io/github-action@v4
       with:
         working-directory: ./cypress
-        start: yarn start
+        start: yarn run cypress run
         wait-on: 'http://localhost:8000'
         wait-on-timeout: 60
         record: true
