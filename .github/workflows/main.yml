@@ -20,14 +20,20 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+    - name: Run Server
+      run: |
+        python manage.py runserver
     - name: Checkout
       uses: actions/checkout@v2
     - name: Run Cypress Tests
       uses: cypress-io/github-action@v4
-      # run django server in background
+      # run the tests in the "cypress" of local host app  and folder with yarn and record the results
       with:
-        start: python manage.py runserver
-        wait-on: http://localhost:8000
-        wait-on-timeout: 60
-        working-directory: ./cypress
-        run: yarn run cypress:run
+        start: yarn run cy:run
+        wait-on: 'http://localhost:8000'
+        wait-on-timeout: 300
+        record: true
+        config-file: cypress.json
+        browser: chrome
+        spec: cypress/integration/tests/*
+        env: BASE_URL=http://localhost:8000
