@@ -17,23 +17,28 @@ jobs:
       run: |
         python manage.py makemigrations
         python manage.py migrate --run-syncdb
-    - name: Run Tests
-      run: |
-        python manage.py test
-    - name: Run Server
-      run: |
-        python manage.py runserver
-    - name: Checkout
       uses: actions/checkout@v2
     - name: Run Cypress Tests
       uses: cypress-io/github-action@v4
+      
       # run the tests in the "cypress" of local host app  and folder with yarn and record the results
       with:
-        start: yarn run cy:run
+        start: python manage.py runserver
         wait-on: 'http://localhost:8000'
-        wait-on-timeout: 300
+        wait-on-timeout: 60
         record: true
         config-file: cypress.json
         browser: chrome
+        headless: true
         spec: cypress/integration/tests/*
-        env: BASE_URL=http://localhost:8000
+        env: CYPRESS_baseUrl=http://localhost:8000
+        with:
+          start: python manage.py runserver
+          wait-on: 'http://localhost:8000'
+          wait-on-timeout: 60
+          record: true
+          config-file: cypress.json
+          browser: chrome
+          headless: true
+          spec: cypress/integration/tests/*
+          env: CYPRESS_baseUrl=http://localhost:8000
