@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% load bootstrap4 %} {% bootstrap_css %}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #15171b;
+      }
+
+      #logo {
+        color: #4fdb0d;
+        font-size: 1.5rem;
+        margin-left: 5rem;
+        transition: ease 0.5s;
+      }
+
+      #logo:hover {
+        font-size: 1.5rem;
+        margin-left: 6.5rem;
+        transition: ease 0.5s;
+      }
+      .nav {
+        width: 100vw;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        padding: 20px 10px 10px 10px;
+      }
+      .nav h5 {
+        margin-right: 5rem;
+      }
+      .main-content {
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-box {
+        color: white;
+        width: 600px;
+        height: fit-content;
+        background-color: #272727;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 10px;
+      }
+      .form-box h1 {
+        font-size: 23px;
+        border-bottom: 1px solid #4fdb0d;
+        padding-top: 10px;
+      }
+      .button-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 10px;
+      }
+      .button-box button {
+        width: 300px;
+        border: 1px solid #3a9b0c;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 5px;
+        color: white;
+        background: none;
+        outline: none;
+        border-radius: 5px;
+        transition: all 300ms ease-in-out;
+      }
+      .button-box button:hover {
+        background-color: #3a9b0c;
+      }
+      .descricao {
+        outline: none;
+        height: 100px;
+        width: 450px;
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+        padding-left: 5px;
+        border-radius: 5px;
+      }
+      .nome {
+        background: none;
+        border: 1px solid white;
+        padding: 5px;
+        color: white;
+        outline: none;
+        border-radius: 5px;
+        width: 250px;
+      }
+      .titulo {
+        background: none;
+        border: 1px solid white;
+        padding: 5px;
+        color: white;
+        outline: none;
+        border-radius: 5px;
+        width: 250px;
+      }
+      .form-control {
+        width: 250px;
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+      }
+      .form-control:focus-within {
+        background-color: transparent;
+        outline: none;
+        border: none;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .message-box {
+        width: 100vw;
+        background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 0px;
+      }
+      .alert {
+        width: 500px;
+        text-align: center;
+        margin-bottom: 0;
+      }
+      @media (max-width: 1400px) {
+        body {
+          overflow-x: hidden;
+        }
+        .main-content {
+          height:fit-content;
+        }
+        .form-box {
+          height: fit-content;
+        }
+        .descricao {
+          width: 380px;
+          height: 63px;
+        }
+        .form-control {
+          height: 30px;
+        }
+        .form-group {
+          height: fit-content;
+        }
+        .titulo {
+          height: 30px;
+        }
+      }
+      .form-group .aprovado {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        #logo {
+          margin-left: 0;
+        }
+        .nav h5 {
+          margin-right: 0;
+        }
+        .main-content{
+          padding-top: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="{% url 'index' %}" id="logo">
+        <img src="{% static "roottsapp/images/roottst.png" %}" alt="rootts"
+        id="image" style="width:120px;" />
+      </a>
+      {% if request.user.is_authenticated %}
+        <h5 class="text-light">Olá, {{request.user}}</h5>
+        {% else %}
+          <h5 class="text-light">Olá, usuário(a)</h5>
+      {% endif %}
+    </nav>
+    {% if messages %} {% for message in messages %}
+    <div class="message-box">
+      <div class="alert {{ message.tags }} alert-dismissible alert-success">
+        <a href="{% url 'DenunciaForm' %}" class="close" data-dismiss="alert">
+          ×
+        </a>
+        <strong>{{message}}</strong>
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+    <div class="main-content">
+      <div class="form-box">
+        <h1>Reportar Problema</h1>
+        <form action="." method="post">
+          {% csrf_token %} {% for field in form %}
+          <div class="form-group">
+            <label for="{{field.id_for_label}}">{{field.label}} </label>
+            {{field}} {% if field.help_text %}
+            <p class="help-text">{{field.help_text}}</p>
+            {% endif %}
+          </div>
+          {% endfor %} {% comment %} Only Submit if is commited {% endcomment %}
+          <div class="button-box">
+            <button type="submit" value="enviar">Enviar Relatório</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

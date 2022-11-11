@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+<div class="text-light" style="margin-bottom: 1.5rem;display: flex; align-items: center;justify-content: space-between;">
+  <div style="margin-left: 20px;">
+  <h3>
+      {{ encosta.nome }} - {{ encosta.local }}
+    </h3>
+  </div>
+    <a href="{% url 'crud' %}" class="btn btn-outline-success" style="margin-right: 20px;">Voltar</a>
+</div>
+
+
+    <div class="table-responsive-xl table-dark">
+      <table class="table text-light">
+        <thead>
+          <tr>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">Declividade</th>
+            <th scope="col">Construções por m²</th>
+            <th scope="col">Coef. Umidade</th>
+            <th scope="col">Redes Viarias por m²</th>
+            <th scope="col">Corpos Liquidos por m²</th>
+            <th scope="col">Nível de Risco de Deslizamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ encosta.latitude }}</td>
+            <td>{{ encosta.longitude }}</td>
+            <td>{{ encosta.declividade }}</td>
+            <td>{{ encosta.numeroConstrucoes }}</td>
+            <td>{{ encosta.coeficienteUmidade }}</td>
+            <td>{{ encosta.proximidadeRedeViarias }}</td>
+            <td>{{ encosta.proximidadeCorposLiquidos }}</td>
+            <td>{{ encosta.prioridadeEncosta }}</td>
+          </tr>
+
+      </table>
+    </div>
+
+    </div>
+{% endblock %}
