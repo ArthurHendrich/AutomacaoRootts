@@ -1,0 +1,20 @@
+name: E2E Cypress Integration
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cypress run
+      uses: cypress-io/github-action@v4
+      with:
+        working-directory: ./cypress
+        start: yarn start
+        wait-on: 'http://localhost:8000'
+        wait-on-timeout: 60
+        record: true
+        config-file: cypress.json
+        browser: chrome
+        headless: true
+        spec: cypress/integration/**/*.spec.js
+        env: CYPRESS_baseUrl=http://localhost:8000
