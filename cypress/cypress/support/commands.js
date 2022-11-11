@@ -24,7 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import loc from "./locators";
 
 Cypress.SelectorPlayground.defaults({
   selectorPriority: [
@@ -38,15 +37,4 @@ Cypress.SelectorPlayground.defaults({
     "tag",
     "nth-child",
   ],
-});
-
-Cypress.Commands.add("login", (user, password) => {
-  cy.get(loc.LOGIN.USERNAME).should("exist");
-  cy.get(loc.LOGIN.USERNAME).type(user);
-
-  cy.get(loc.LOGIN.PASSWORD).should("exist");
-  cy.get(loc.LOGIN.PASSWORD).type(password, { log: false });
-
-  cy.xpath(loc.LOGIN.XP_BTN_LOGIN).should("exist");
-  cy.xpath(loc.LOGIN.XP_BTN_LOGIN).click({ force: true, multiple: true });
 });

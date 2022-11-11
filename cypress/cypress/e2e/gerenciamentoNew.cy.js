@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
 
 describe(`Validate Rootts APP`, () => {
-  const acessUrl = `http://127.0.0.1:8000/`;
-
   before(() => {
-    cy.visit(acessUrl);
+    cy.visit('http://localhost:8000');
 
     Cypress.on("uncaught:exception", () => false);
 
