@@ -4,7 +4,6 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -13,20 +12,20 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    # scripts
     - name: Run Migrations
       run: |
         python manage.py makemigrations
-        python manage.py migrate --run-syncdb
-      uses: actions/checkout@v2
-    - name: Run Cypress Tests
-      uses: cypress-io/github-action@v4
-      with:
-        start: python manage.py runserver
-        wait-on: 'http://localhost:8000'
-        wait-on-timeout: 60
-        record: true
-        config-file: cypress.json
-        browser: chrome
-        headless: true
-        spec: cypress/integration/tests/*
-        env: CYPRESS_baseUrl=http://localhost:8000
+        python manage.py migrate
+    - name: Run Tests
+      run: |
+        python manage.py test
+    - name: Run Project Django
+      run: |
+        python manage.py runserver &
+    - name: Run Cypress
+      # go to the cypress folder
+      working-directory: ./cypress
+      run: |
+        yarn add
+        yarn run cypress run
