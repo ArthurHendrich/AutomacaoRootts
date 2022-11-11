@@ -28,11 +28,6 @@ jobs:
     - name: Run Cypress Tests
       uses: cypress-io/github-action@v4
       with:
-        start: python manage.py runserver
-        wait-on: 'http://localhost:8000'
-        wait-on-timeout: 60
-        browser: chrome
-        headless: true
-        spec: cypress/integration/tests/*
-        env: BASE_URL=http://localhost:8000
+        start: yarn run cypress run
+      
     
