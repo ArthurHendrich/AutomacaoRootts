@@ -245,14 +245,6 @@ describe(`Validate Rootts APP`, () => {
       cy.get('.btn-primary').should("be.visible").and("have.text", "Salvar").click()
     })
 
-    it("Validar Excluir Encosta", () => {
-      cy.get(':nth-child(1) > .buttons > .btn-danger').click()
-      cy.get('[method="post"] > .text-light').should("be.visible")
-
-      cy.get('.btn-danger').should("be.visible").and("have.text", "Confirmar")
-      cy.get('[href="/crud/"]').should("be.visible").click()
-    })
-
     it("Validar Adicionar Encosta", () => {
       cy.get('.btn').should("be.visible").and("have.text", "Adicionar encosta").click()
 
@@ -267,6 +259,14 @@ describe(`Validate Rootts APP`, () => {
       cy.get('#id_proximidadeCorposLiquidos').type("1.3451")
       cy.get('#id_prioridadeEncosta').select("Baixo")
       cy.get('.btn-primary').should("be.visible").and("have.text", "Salvar").click()
+    })
+
+    it("Validar Excluir Encosta", () => {
+      cy.get(':nth-child(1) > .buttons > .btn-danger').click()
+      cy.get('[method="post"] > .text-light').should("be.visible")
+
+      cy.get('[href="/crud/"]').should("be.visible")
+      cy.get('.btn-danger').should("be.visible").and("have.text", "Confirmar").click()
     })
 
     it("Validar Pesquisar Encosta", () => {
@@ -294,7 +294,7 @@ describe(`Validate Rootts APP`, () => {
     })
 
     it("Validar Descartar Report", () => {
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-danger')])[5]`).click()
+      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-danger')])[1]`).click()
 
       cy.get('[method="post"] > .text-light').should("be.visible")
 
