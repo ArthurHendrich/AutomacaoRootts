@@ -277,14 +277,6 @@ describe(`Validate Rootts APP`, () => {
       cy.get('[style="font-size: 30px"]').should("be.visible")
       
       cy.get('[type="submit"]').should("exist").and("be.visible")
-
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')])[7]`).should("be.visible")
-
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//span[contains(. , 'Aprovar')])[1]`).should("be.visible")
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//input)[1]`).should("be.visible")
-
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-warning margin')])[1]`).should("be.visible")
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-danger')])[1]`).should("be.visible")
     })
 
     it("Validar Visualizar Report", () => {
