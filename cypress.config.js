@@ -10,6 +10,7 @@ module.exports = defineConfig({
   // },
   e2e: {
     experimentalSessionAndOrigin: false,
+    video: false,
     // setupNodeEvents(on, config) {
     //   on('before:browsers:launch', (browser = {}, launchOptions) => {
     //     if(browser.name === 'chrome') {
