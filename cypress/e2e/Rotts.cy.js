@@ -2,18 +2,23 @@
 
 describe(`Validate Rootts APP`, () => {
   before(() => {
+    cy.viewport(1920, 1080);
     cy.visit('http://localhost:8000');
-
+    
     Cypress.on("uncaught:exception", () => false);
-
+    
     Cypress.Cookies.preserveOnce("JSESSIONID", "XSRF-TOKEN");
   });
 
+  beforeEach(() => {
+    cy.viewport(1920, 1080);
+  })
+  
   after(() => {
     cy.clearLocalStorage();
     cy.clearCookies();
   });
-
+  
   describe("Validar História sem Login", () => {
     afterEach(function () {
       if (this.currentTest.state === "failed") {
@@ -283,14 +288,13 @@ describe(`Validate Rootts APP`, () => {
       cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-warning margin')])[1]`).click()
 
       cy.get('h3').should("be.visible")
-      cy.get('.text-success').should("be.visible")
       cy.get('[scope="col"]').should("be.visible")
 
       cy.get('.btn').should("be.visible").and("have.text", "Voltar").click()
     })
 
-    it("Validar Descartar Reprot", () => {
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-danger')])[1]`).click()
+    it("Validar Descartar Report", () => {
+      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//a[contains(@class, 'btn-sm btn-danger')])[5]`).click()
 
       cy.get('[method="post"] > .text-light').should("be.visible")
 
