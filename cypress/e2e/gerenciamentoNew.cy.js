@@ -27,10 +27,9 @@ describe(`Validate Rootts APP`, () => {
     });
 
     it("Validar Contatar Emergencia", () => {
-      cy.get(":nth-child(1) > .btn").should("exist").and("be.visible").click();
-      cy.get(".buttom-box > .btn").should("exist").and("be.visible");
+      cy.xpath(`//a[contains(@class, 'btn btn-outline-danger')]`).scrollIntoView().should('be.visible');
     });
-
+    
     it("Valida Reportar um problema", () => {
       var url = cy.url();
       cy.get(".row > :nth-child(2) > .btn").click();
@@ -80,10 +79,10 @@ describe(`Validate Rootts APP`, () => {
     });
 
     it("Validar pesquisar uma Encosta", () => {
-      cy.get("#form12").should("be.visible").type("testando");
+      cy.get("#form12").should("be.visible").type("Encosta");
       cy.get("#form12").type("{enter}");
 
-      cy.get("tbody > tr > :nth-child(1)").should("have.text", "testando");
+      cy.get("tbody > tr > :nth-child(1)").should('be.visible')
       cy.get("#image").click();
     });
   });
@@ -111,10 +110,7 @@ describe(`Validate Rootts APP`, () => {
       cy.clearCookies();
     })
 
-    it("Validar Contatar Emergencia", () => {
-      cy.get(":nth-child(1) > .btn").should("exist").and("be.visible")
-      cy.get(".buttom-box > .btn").should("exist").and("be.visible");
-    });
+
 
     it("Valida Reportar um problema", () => {
       var url = cy.url();
@@ -165,10 +161,10 @@ describe(`Validate Rootts APP`, () => {
     });
 
     it("Validar pesquisar uma Encosta", () => {
-      cy.get("#form12").should("be.visible").type("testando");
+      cy.get("#form12").should("be.visible").type("Encosta");
       cy.get("#form12").type("{enter}");
 
-      cy.get("tbody > tr > :nth-child(1)").should("have.text", "testando");
+      cy.get("tbody > tr > :nth-child(1)").should('be.visible');
       cy.get("#image").click();
     });
   });
@@ -282,7 +278,7 @@ describe(`Validate Rootts APP`, () => {
       
       cy.get('[type="submit"]').should("exist").and("be.visible")
 
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')])[1]`).should("be.visible")
+      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')])[7]`).should("be.visible")
 
       cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//span[contains(. , 'Aprovar')])[1]`).should("be.visible")
       cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//input)[1]`).should("be.visible")
@@ -306,14 +302,14 @@ describe(`Validate Rootts APP`, () => {
 
       cy.get('[method="post"] > .text-light').should("be.visible")
 
-      cy.get('.btn-danger').should("be.visible").and("have.text", "Confirmar")
-      cy.get('[href="/Engenheiro_formulario/"]').should("be.visible").click()
+      cy.get('[href="/Engenheiro_formulario/"]').should("be.visible")
+      cy.get('.btn-danger').should("be.visible").and("have.text", "Confirmar").click()
 
     })
 
     it("Validar Aprovar Report", () => {
       cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//span[contains(. , 'Aprovar')])[1]`).should("not.be.checked").click()
-      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//span[contains(. , 'Aprovado')])[1]`).should("be.visible").click()
+      cy.xpath(`(//div[contains(@class, 'main-content')]//h2[contains(. , 'Teste Automatico')]//..//..//label[contains(@id, 'label')]//span[contains(. , 'Aprovado')])[1]`).should("be.visible")
 
       cy.get('[type="submit"]').click()
       cy.get('[style="font-size: 30px"]').should("be.visible").and('have.text', 'Reportes Aprovados');

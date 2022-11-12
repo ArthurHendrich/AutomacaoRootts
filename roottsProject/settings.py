@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     'rootts.herokuapp.com',
     '127.0.0.1',
     'localhost',
+    '*'
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://rootts.herokuapp.com','https://*.127.0.0.1']
